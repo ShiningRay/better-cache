@@ -4,6 +4,30 @@ better-cache
 
 Rails like caching for node.
 
+## Why
+
+The main reason I built this is because I love how in rails you can just use 
+
+      Rails.cache.fetch('key', do ... end)
+
+and it'll worry about all the scenarios for you (when its cached, when its not). Furthermore, as you can see above, trying to do this in nodelike above is just ridiculous. A lot of the time, I was also caching the results of functions, all with callbacks of course, which made it even messier. So hence better-cache was hacked together while bored in a lecture one day.
+
+## Installation
+
+    npm install better-cache
+
+## Syntax
+
+    var cache = require('better-cache');
+
+    cache.fetch(key, fn, params, callback)
+
+  fn is a function you define that takes in any number of params, the last of which is a callback function. Params is the params you want to pass in, minus the callback function (we'll take care of that). Whatever you return in that callback function (the last param of the fn function) will be cached, and next time you run cache.fetch(key) it'll get the cached result rather than running the function.
+
+  The only preresiquite is that you don't use the variable name 'cacheCallback' in the fn function :)
+
+  cache.remove(), cache.clear(), cache.size() should all be pretty self-explanatory from the example above.
+  
 
 ## Example
 
@@ -32,11 +56,7 @@ Which is much easier than something like this:
         }) 
       }
 
-A little prettier no? The main reason I built this is because I love how in rails you can just use 
-
-      Rails.cache.fetch('key', do ... end)
-
-and it'll worry about all the scenarios for you (when its cached, when its not). Furthermore, as you can see above, trying to do this in nodelike above is just ridiculous. A lot of the time, I was also caching the results of functions, all with callbacks of course, which made it even messier. So hence better-cache was hacked together while bored in a lecture one day.
+A little prettier no? 
 
 
 You can also do:
@@ -44,23 +64,6 @@ You can also do:
     cache.remove(key) //key 
     cache.clear() //clear all
     cache.size() // 0
-
-## Installation
-
-    npm install better-cache
-
-## Syntax
-
-    var cache = require('better-cache');
-
-    cache.fetch(key, fn, params, callback)
-
-  fn is a function you define that takes in any number of params, the last of which is a callback function. Params is the params you want to pass in, minus the callback function (we'll take care of that). Whatever you return in that callback function (the last param of the fn function) will be cached, and next time you run cache.fetch(key) it'll get the cached result rather than running the function.
-
-  The only preresiquite is that you don't use the variable name 'cacheCallback' in the fn function :)
-
-  cache.remove(), cache.clear(), cache.size() should all be pretty self-explanatory from the example above.
-
 
 ## To-do
 
