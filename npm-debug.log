@@ -1,109 +1,26 @@
 0 info it worked if it ends with ok
-1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', '-g', 'better-cache' ]
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'publish' ]
 2 info using npm@1.2.25
 3 info using node@v0.10.10
-4 verbose read json /usr/local/lib/package.json
-5 verbose read json /usr/local/lib/package.json
-6 verbose cache add [ 'better-cache', null ]
-7 verbose cache add name=undefined spec="better-cache" args=["better-cache",null]
-8 verbose parsed url { protocol: null,
-8 verbose parsed url   slashes: null,
-8 verbose parsed url   auth: null,
-8 verbose parsed url   host: null,
-8 verbose parsed url   port: null,
-8 verbose parsed url   hostname: null,
-8 verbose parsed url   hash: null,
-8 verbose parsed url   search: null,
-8 verbose parsed url   query: null,
-8 verbose parsed url   pathname: 'better-cache',
-8 verbose parsed url   path: 'better-cache',
-8 verbose parsed url   href: 'better-cache' }
-9 silly lockFile de598b50-better-cache better-cache
-10 verbose lock better-cache /Users/niallpaterson/.npm/de598b50-better-cache.lock
-11 silly lockFile de598b50-better-cache better-cache
-12 silly lockFile de598b50-better-cache better-cache
-13 verbose addNamed [ 'better-cache', '' ]
-14 verbose addNamed [ null, '' ]
-15 silly lockFile 600dd407-better-cache better-cache@
-16 verbose lock better-cache@ /Users/niallpaterson/.npm/600dd407-better-cache.lock
-17 silly addNameRange { name: 'better-cache', range: '', hasData: false }
-18 verbose url raw better-cache
-19 verbose url resolving [ 'https://registry.npmjs.org/', './better-cache' ]
-20 verbose url resolved https://registry.npmjs.org/better-cache
-21 info trying registry request attempt 1 at 22:42:01
-22 http GET https://registry.npmjs.org/better-cache
-23 http 200 https://registry.npmjs.org/better-cache
-24 silly registry.get cb [ 200,
-24 silly registry.get   { vary: 'Accept',
-24 silly registry.get     server: 'CouchDB/1.3.1 (Erlang OTP/R15B03)',
-24 silly registry.get     etag: '"D1FILIYKP5I9TUOGWYMO5C4SZ"',
-24 silly registry.get     date: 'Wed, 09 Oct 2013 21:41:59 GMT',
-24 silly registry.get     'content-type': 'application/json',
-24 silly registry.get     'content-length': '7153' } ]
-25 silly addNameRange number 2 { name: 'better-cache', range: '', hasData: true }
-26 silly addNameRange versions [ 'better-cache', [ '0.0.1' ] ]
-27 verbose addNamed [ 'better-cache', '0.0.1' ]
-28 verbose addNamed [ '0.0.1', '0.0.1' ]
-29 silly lockFile 5d1869ad-better-cache-0-0-1 better-cache@0.0.1
-30 verbose lock better-cache@0.0.1 /Users/niallpaterson/.npm/5d1869ad-better-cache-0-0-1.lock
-31 verbose read json /Users/niallpaterson/.npm/better-cache/0.0.1/package/package.json
-32 silly lockFile 5d1869ad-better-cache-0-0-1 better-cache@0.0.1
-33 silly lockFile 5d1869ad-better-cache-0-0-1 better-cache@0.0.1
-34 silly lockFile 600dd407-better-cache better-cache@
-35 silly lockFile 600dd407-better-cache better-cache@
-36 silly resolved [ { name: 'better-cache',
-36 silly resolved     description: 'Rails like caching for node.js',
-36 silly resolved     author: { name: 'Niall Paterson', email: 'npaters@tcd.ie' },
-36 silly resolved     version: '0.0.1',
-36 silly resolved     repository: { type: 'git', url: 'http://github.com/paterson/better-cache' },
-36 silly resolved     keywords: [ 'cache', 'ram', 'simple', 'storage', 'rails', 'better-cache' ],
-36 silly resolved     main: './lib/index.js',
-36 silly resolved     bugs: { url: 'https://github.com/paterson/paterson/issues' },
-36 silly resolved     _id: 'better-cache@0.0.1',
-36 silly resolved     dependencies: { 'memory-cache': '0.0.5' },
-36 silly resolved     devDependencies: {},
-36 silly resolved     optionalDependencies: {},
-36 silly resolved     engines: { node: '*' },
-36 silly resolved     readme: 'better-Cache\n============\n\n\nRails like caching for node.\n\n\n## Example\n\n      cache.fetch(\'user\', getUser, [id], function (user) {\n        // do next thing :)\n        // the user variable in the callback below is now in cache\n        //the getUser function won\'t be called next time you call cache.fetch with \'user\' as the key\n        //in fact cache.fetch(\'key\') will work.\n      })\n\n      getUser = function (id, callback) {\n        User.find(id).success(function (user) {\n          callback(user)\n        })\n      }\n\nWhich is much easier than something like this:\n\n      if (otherCacheModule.get(\'users\')) {\n        thing_to_do_next_that_I_have_to_put_in_a_function(otherCacheModule.get(\'users\')) //because otherwise I\'ve to write everything in this if, and duplicate any overlapping code with the below else\n      }\n      else {\n        getUsers(function (users) {\n          otherCacheModule.put(\'users\', users)\n          thing_to_do_next_that_I_have_to_put_in_a_function(users) //because otherwise I\'ve to write everything in this else, and duplicate any overlapping code with the above if. Sound Familiar?\n        }) \n      }\n\nA little prettier no? The main reason I built this is because I love how in rails you can just use \n\n      Rails.cache.fetch(\'key\', do ... end)\n\nand it\'ll worry about all the scenarios for you (when its cached, when its not). Furthermore, as you can see above, trying to do this in nodelike above is just ridiculous. A lot of the time, I was also caching the results of functions, all with callbacks of course, which made it even messier. So hence better-cache was hacked together while bored in a lecture one day.\n\n\nYou can also do:\n\n    cache.remove(key) //key \n    cache.clear() //clear all\n    cache.size() // 0\n\n## Installation\n\n    npm install better-cache\n\n## Syntax\n\n    var cache = require(\'better-cache\');\n\n    cache.fetch(key, fn, params, callback)\n\n  fn is a function you define that takes in any number of params, the last of which is a callback function. Params is the params you want to pass in, minus the callback function (we\'ll take care of that). Whatever you return in that callback function (the last param of the fn function) will be cached, and next time you run cache.fetch(key) it\'ll get the cached result rather than running the function.\n\n  The only preresiquite is that you don\'t use the variable name \'cacheCallback\' in the fn function :)\n\n  cache.remove(), cache.clear(), cache.size() should all be pretty self-explanatory from the example above.\n\n\n## To-do\n\n  1. Move away from dependency on memory cache.\n  2. Ability to Expire cache\n\n\n\nFeel free to fork, or add any issues you notice.\nPull requests are of course always welcome. I\'m using coffeescript for this, so edit that, not the js file then compile (bare)',
-36 silly resolved     readmeFilename: 'README.md',
-36 silly resolved     _from: 'better-cache@' } ]
-37 info install better-cache@0.0.1 into /usr/local/lib
-38 info installOne better-cache@0.0.1
-39 verbose from cache /Users/niallpaterson/.npm/better-cache/0.0.1/package/package.json
-40 info /usr/local/lib/node_modules/better-cache unbuild
-41 verbose read json /usr/local/lib/node_modules/better-cache/package.json
-42 verbose tar unpack /Users/niallpaterson/.npm/better-cache/0.0.1/package.tgz
-43 silly lockFile 5e776c92-al-lib-node-modules-better-cache /usr/local/lib/node_modules/better-cache
-44 verbose lock /usr/local/lib/node_modules/better-cache /Users/niallpaterson/.npm/5e776c92-al-lib-node-modules-better-cache.lock
-45 silly lockFile 896509e7-m-better-cache-0-0-1-package-tgz /Users/niallpaterson/.npm/better-cache/0.0.1/package.tgz
-46 verbose lock /Users/niallpaterson/.npm/better-cache/0.0.1/package.tgz /Users/niallpaterson/.npm/896509e7-m-better-cache-0-0-1-package-tgz.lock
-47 silly gunzTarPerm modes [ '755', '644' ]
-48 error Error: EACCES, mkdir '/usr/local/lib/node_modules/better-cache'
-48 error  { [Error: EACCES, mkdir '/usr/local/lib/node_modules/better-cache']
-48 error   errno: 3,
-48 error   code: 'EACCES',
-48 error   path: '/usr/local/lib/node_modules/better-cache',
-48 error   fstream_type: 'Directory',
-48 error   fstream_path: '/usr/local/lib/node_modules/better-cache',
-48 error   fstream_class: 'DirWriter',
-48 error   fstream_stack:
-48 error    [ '/usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23',
-48 error      '/usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:37:53',
-48 error      'Object.oncomplete (fs.js:107:15)' ] }
-49 error Please try running this command again as root/Administrator.
-50 error System Darwin 12.4.0
-51 error command "node" "/usr/local/bin/npm" "install" "-g" "better-cache"
-52 error cwd /Users/niallpaterson/Dropbox/projects/better-cache
-53 error node -v v0.10.10
-54 error npm -v 1.2.25
-55 error path /usr/local/lib/node_modules/better-cache
-56 error fstream_path /usr/local/lib/node_modules/better-cache
-57 error fstream_type Directory
-58 error fstream_class DirWriter
-59 error code EACCES
-60 error errno 3
-61 error stack Error: EACCES, mkdir '/usr/local/lib/node_modules/better-cache'
-62 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23
-62 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:37:53
-62 error fstream_stack Object.oncomplete (fs.js:107:15)
-63 verbose exit [ 3, true ]
+4 verbose publish [ '.' ]
+5 verbose read json /Users/niallpaterson/Dropbox/projects/better-cache/package.json
+6 error Error: invalid version: 0.0.1.1
+6 error     at Object.module.exports.fixVersionField (/usr/local/lib/node_modules/npm/node_modules/read-package-json/node_modules/normalize-package-data/lib/fixer.js:84:13)
+6 error     at /usr/local/lib/node_modules/npm/node_modules/read-package-json/node_modules/normalize-package-data/lib/normalize.js:28:38
+6 error     at Array.forEach (native)
+6 error     at normalize (/usr/local/lib/node_modules/npm/node_modules/read-package-json/node_modules/normalize-package-data/lib/normalize.js:27:15)
+6 error     at final (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:304:33)
+6 error     at then (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:118:48)
+6 error     at /usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:293:40
+6 error     at fs.js:266:14
+6 error     at Object.oncomplete (fs.js:107:15)
+7 error If you need help, you may report this log at:
+7 error     <http://github.com/isaacs/npm/issues>
+7 error or email it to:
+7 error     <npm-@googlegroups.com>
+8 error System Darwin 12.4.0
+9 error command "node" "/usr/local/bin/npm" "publish"
+10 error cwd /Users/niallpaterson/Dropbox/projects/better-cache
+11 error node -v v0.10.10
+12 error npm -v 1.2.25
+13 verbose exit [ 1, true ]
