@@ -9,7 +9,8 @@ Rails like caching for node.
 
       cache.fetch('user', getUser, [id], function (user) {
         // do next thing :)
-        // the user variable in the callback below is now in cache, and the getUser function won't be called next time you call cache.fetch with 'user' as the key
+        // the user variable in the callback below is now in cache
+        //the getUser function won't be called next time you call cache.fetch with 'user' as the key
         //in fact cache.fetch('key') will work.
       })
 
@@ -54,7 +55,7 @@ You can also do:
 
     cache.fetch(key, fn, params, callback)
 
-  fn is a function you define that takes in any number of params, the last of which is a callback function. Params is the params you want to pass in, minus the callback function (we'll take care of that)
+  fn is a function you define that takes in any number of params, the last of which is a callback function. Params is the params you want to pass in, minus the callback function (we'll take care of that). Whatever you return in that callback function (the last param of the fn function) will be cached, and next time you run cache.fetch(key) it'll get the cached result rather than running the function.
 
   The only preresiquite is that you don't use the variable name 'cacheCallback' in the fn function :)
 
