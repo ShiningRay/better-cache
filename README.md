@@ -21,7 +21,7 @@ Rails like caching for node
         })
       }
 
-      Which is much easier than something like this:
+Which is much easier than something like this:
 
       if (otherCacheModule.get('users')) {
         thing_to_do_next_that_I_have_to_put_in_a_function(otherCacheModule.get('users')) //because otherwise I've to write everything in this if, and duplicate any overlapping code with the below else
@@ -41,7 +41,7 @@ and it'll worry about all the scenarios for you (when its cached, when its not).
 
 ## Installation
 
-  `npm install better-cache`
+    npm install better-cache
 
 ## Syntax
 
