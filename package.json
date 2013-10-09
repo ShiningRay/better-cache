@@ -1,0 +1,34 @@
+{
+  "name": "better-cache",
+  "description": "Rails like caching for node.js",
+  "author": {
+    "name": "Niall Paterson",
+    "email": "npaters@tcd.ie"
+  },
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/paterson/better-cache"
+  },
+  "keywords": [
+    "cache",
+    "ram",
+    "simple",
+    "storage",
+    "rails",
+    "better-cache"
+  ],
+  "main": "./lib/index.js",
+  "bugs": {
+    "url": "https://github.com/paterson/paterson/issues"
+  },
+  "_id": "better-cache@0.0.1",
+  "dependencies": {
+    "memory-cache": "0.0.5"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}
