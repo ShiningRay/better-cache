@@ -33,7 +33,7 @@ and it'll worry about all the scenarios for you (when its cached, when its not).
 
       cache.fetch('user', getUser, [id], function (user) {
         // do next thing :)
-        // the user variable in the callback below is now in cache
+        // the user variable in the callback below is now in cache if it wasn't already.
         //the getUser function won't be called next time you call cache.fetch with 'user' as the key
         //in fact cache.fetch('key') will work.
       })
