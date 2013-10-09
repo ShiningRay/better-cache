@@ -2,7 +2,7 @@ better-Cache
 ============
 
 
-Rails like caching for node
+Rails like caching for node.
 
 
 ## Example
@@ -17,7 +17,7 @@ Rails like caching for node
 
       getUser = function (id, callback) {
         User.find(id).success(function (user) {
-          callback(user)
+          callback(user) // user is now in cache, and this function won't be called next time you call cache.fetch('user'), in fact you techincally won't even need the other params (getUser, [id], etc..)
         })
       }
 
