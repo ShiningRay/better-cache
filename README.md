@@ -9,15 +9,13 @@ Rails like caching for node.
 
       cache.fetch('user', getUser, [id], function (user) {
         // do next thing :)
-        cache.size() // will be greater than 0.
-        cache.remove('user') //key 
-        cache.clear() //clear all
-        cache.size() // 0
+        // the user variable in the callback below is now in cache, and the getUser function won't be called next time you call cache.fetch with 'user' as the key
+        //in fact cache.fetch('key') will work.
       })
 
       getUser = function (id, callback) {
         User.find(id).success(function (user) {
-          callback(user) // user is now in cache, and this function won't be called next time you call cache.fetch with 'user' as the key. in fact cache.fetch('key') will work.
+          callback(user)
         })
       }
 
@@ -38,6 +36,13 @@ A little prettier no? The main reason I built this is because I love how in rail
       Rails.cache.fetch('key', do ... end)
 
 and it'll worry about all the scenarios for you (when its cached, when its not). Furthermore, as you can see above, trying to do this in nodelike above is just ridiculous. A lot of the time, I was also caching the results of functions, all with callbacks of course, which made it even messier. So hence better-cache was hacked together while bored in a lecture one day.
+
+
+You can also do:
+
+    cache.remove(key) //key 
+    cache.clear() //clear all
+    cache.size() // 0
 
 ## Installation
 
