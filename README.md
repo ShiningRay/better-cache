@@ -10,7 +10,7 @@ The main reason I built this is because I love how in rails you can just use
 
       Rails.cache.fetch('key', do ... end)
 
-and it'll worry about all the scenarios for you (when its cached, when its not). Furthermore, as you can see above, trying to do this in node like above is just ridiculous. A lot of the time, I was also caching the results of functions, all with callbacks of course, which made it even messier. So hence better-cache was hacked together while bored in a lecture one day.
+and it'll worry about all the scenarios for you (when its cached, when its not). Furthermore, as you can see below in the example, trying to do this in node like above is just ridiculous. A lot of the time, I was also caching the results of functions, all with callbacks of course, which made it even messier. So hence better-cache was hacked together while bored in a lecture one day.
 
 ## Installation
 
