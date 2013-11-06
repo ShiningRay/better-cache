@@ -1,6 +1,6 @@
 memoryCache = require 'memory-cache'
 
-fetch = (key, fn, params, cacheCallback) ->
+exports.fetch = (key, fn, params, cacheCallback) ->
   
   return cacheCallback(memoryCache.get(key)) if memoryCache.get(key)
   cb = (returned_val) ->
@@ -9,17 +9,12 @@ fetch = (key, fn, params, cacheCallback) ->
   params.push(cb)
   fn.apply(null, params)
 
-clear = () ->
+exports.clear = () ->
   memoryCache.clear()
 
-remove = (key) ->
+exports.remove = (key) ->
   memoryCache.del(key)
 
-size = () ->
+exports.size = () ->
   memoryCache.size()
-
-exports.fetch = fetch
-exports.clear = clear
-exports.remove = remove
-exports.size = size
 
