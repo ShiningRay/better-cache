@@ -4,7 +4,6 @@ fetch = (key, fn, params, cacheCallback) ->
   
   return cacheCallback(memoryCache.get(key)) if memoryCache.get(key)
   cb = (returned_val) ->
-    console.log 'in cb', returned_val
     memoryCache.put(key, returned_val)
     cacheCallback(returned_val)
   params.push(cb)

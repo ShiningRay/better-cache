@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/paterson/paterson/issues"
   },
-  "_id": "better-cache@0.0.1",
+  "_id": "better-cache@0.0.3",
   "dependencies": {
     "memory-cache": "0.0.5"
   },
